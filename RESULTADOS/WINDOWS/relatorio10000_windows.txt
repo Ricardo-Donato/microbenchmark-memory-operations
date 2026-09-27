@@ -14,34 +14,34 @@ frequência máxima da cpu: 2112 mhz
 memória ram total       : 15.82 gb
 memória swap total      : 2.88 gb
 discos:
-  C:\ (C:\): total=385.87 gb  usado=57.20 gb  livre=328.67 gb
+  C:\ (C:\): total=385.87 gb  usado=59.78 gb  livre=326.10 gb
   D:\ (D:\): total=931.51 gb  usado=0.13 gb  livre=931.38 gb
 
 dados da execução
 ------------------------------------------------------------
-data/hora da execução : 27/09/2026 15:37:10
-requisições simuladas : 100
+data/hora da execução : 27/09/2026 16:19:40
+requisições simuladas : 10000
 tamanho do bloco      : 4 mb por requisição
-duração total         : 0.32 segundos
+duração total         : 37.48 segundos
 
 uso de cpu (%)
 ------------------------------------------------------------
-mínimo=0.00  médio=7.35  máximo=14.70
+mínimo=0.00  médio=17.00  máximo=73.30
 
 uso de memória do sistema (%)
 ------------------------------------------------------------
-mínimo=37.70  médio=37.75  máximo=37.80
+mínimo=44.90  médio=45.22  máximo=45.80
 
 uso de memória do sistema (mb)
 ------------------------------------------------------------
-mínimo=6112.40  médio=6118.49  máximo=6124.59
+mínimo=7269.31  médio=7325.41  máximo=7410.96
 
 uso de memória do processo (rss, mb)
 ------------------------------------------------------------
-mínimo=26.80  médio=28.84  máximo=30.88
+mínimo=26.22  médio=27.26  máximo=30.23
 
 temperaturas dos sensores (°c)
 ------------------------------------------------------------
 não disponível neste sistema operacional (comum em windows sem software adicional de sensores)
 
-total de amostras coletadas: 2
+total de amostras coletadas: 173

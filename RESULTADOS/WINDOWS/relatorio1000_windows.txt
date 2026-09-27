@@ -19,29 +19,29 @@ discos:
 
 dados da execução
 ------------------------------------------------------------
-data/hora da execução : 27/09/2026 15:37:10
-requisições simuladas : 100
+data/hora da execução : 27/09/2026 15:40:35
+requisições simuladas : 1000
 tamanho do bloco      : 4 mb por requisição
-duração total         : 0.32 segundos
+duração total         : 3.27 segundos
 
 uso de cpu (%)
 ------------------------------------------------------------
-mínimo=0.00  médio=7.35  máximo=14.70
+mínimo=0.00  médio=15.46  máximo=28.00
 
 uso de memória do sistema (%)
 ------------------------------------------------------------
-mínimo=37.70  médio=37.75  máximo=37.80
+mínimo=37.90  médio=37.98  máximo=38.10
 
 uso de memória do sistema (mb)
 ------------------------------------------------------------
-mínimo=6112.40  médio=6118.49  máximo=6124.59
+mínimo=6141.04  médio=6151.16  máximo=6166.31
 
 uso de memória do processo (rss, mb)
 ------------------------------------------------------------
-mínimo=26.80  médio=28.84  máximo=30.88
+mínimo=26.59  médio=28.09  máximo=30.59
 
 temperaturas dos sensores (°c)
 ------------------------------------------------------------
 não disponível neste sistema operacional (comum em windows sem software adicional de sensores)
 
-total de amostras coletadas: 2
+total de amostras coletadas: 16
