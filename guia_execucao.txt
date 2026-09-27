@@ -63,7 +63,7 @@ PASSO A PASSO - LINUX (UBUNTU)
    pasta, no gerenciador de arquivos, e procure a opcao "Abrir no
    terminal", ou navegue manualmente com "cd").
 
-3. Instale a dependencia:
+3. Instale as dependencias do linux:
    pip install psutil
    (se der erro de permissao, use: pip install psutil --user)
 
@@ -74,7 +74,7 @@ PASSO A PASSO - LINUX (UBUNTU)
    (responda "yes" as perguntas padrao)
 
 5. Rode o benchmark (exemplo com 1000 requisicoes):
-   python3 app_benchmark.py --requests 1000 --block-size 4 --out relatorio_linux.txt
+   python3 app_benchmark.py --requests 1000 --block-size 4 --out relatorio100_linux.txt
 
 6. Repita trocando --requests para 100 e para 10000, sempre mudando o
    nome do arquivo em --out (ex.: relatorio_linux_100.txt,
