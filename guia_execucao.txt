@@ -124,9 +124,11 @@ resultados/
   relatorio_windows_100.txt
   relatorio_windows_1000.txt
   relatorio_windows_10000.txt
+  relatorio_windows_100000.txt
   relatorio_linux_100.txt
   relatorio_linux_1000.txt
   relatorio_linux_10000.txt
+  relatorio_linux_100000.txt
 
 
 PROBLEMAS COMUNS
