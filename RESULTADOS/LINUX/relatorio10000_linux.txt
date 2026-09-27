@@ -9,7 +9,7 @@ arquitetura             : x86_64
 processador             : Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz
 núcleos físicos         : 4
 núcleos lógicos         : 8
-frequência atual da cpu : 602 mhz
+frequência atual da cpu : 819 mhz
 frequência máxima da cpu: 4200 mhz
 memória ram total       : 14.93 gb
 memória swap total      : 4.00 gb
@@ -36,37 +36,37 @@ discos:
 
 dados da execução
 ------------------------------------------------------------
-data/hora da execução : 27/09/2026 14:02:21
-requisições simuladas : 100
+data/hora da execução : 27/09/2026 14:03:45
+requisições simuladas : 10000
 tamanho do bloco      : 4 mb por requisição
-duração total         : 0.49 segundos
+duração total         : 37.79 segundos
 
 uso de cpu (%)
 ------------------------------------------------------------
-mínimo=22.20  médio=22.20  máximo=22.20
+mínimo=12.60  médio=13.94  máximo=28.60
 
 uso de memória do sistema (%)
 ------------------------------------------------------------
-mínimo=24.00  médio=24.00  máximo=24.00
+mínimo=23.90  médio=23.91  máximo=24.00
 
 uso de memória do sistema (mb)
 ------------------------------------------------------------
-mínimo=3664.22  médio=3664.22  máximo=3664.22
+mínimo=3659.71  médio=3660.51  máximo=3662.07
 
 uso de memória do processo (rss, mb)
 ------------------------------------------------------------
-mínimo=22.72  médio=22.72  máximo=22.72
+mínimo=22.75  médio=22.83  máximo=22.84
 
 temperaturas dos sensores (°c)
 ------------------------------------------------------------
-acpitz_acpitz: mínimo=39.00  médio=39.00  máximo=39.00
-nvme_Composite: mínimo=48.85  médio=48.85  máximo=48.85
-pch_cannonlake_pch_cannonlake: mínimo=44.00  médio=44.00  máximo=44.00
-iwlwifi_1_iwlwifi_1: mínimo=44.00  médio=44.00  máximo=44.00
-coretemp_Package id 0: mínimo=42.00  médio=42.00  máximo=42.00
-coretemp_Core 0: mínimo=42.00  médio=42.00  máximo=42.00
-coretemp_Core 1: mínimo=41.00  médio=41.00  máximo=41.00
-coretemp_Core 2: mínimo=42.00  médio=42.00  máximo=42.00
-coretemp_Core 3: mínimo=41.00  médio=41.00  máximo=41.00
+acpitz_acpitz: mínimo=40.00  médio=41.40  máximo=43.00
+nvme_Composite: mínimo=47.85  médio=48.72  máximo=48.85
+pch_cannonlake_pch_cannonlake: mínimo=44.00  médio=45.60  máximo=47.00
+iwlwifi_1_iwlwifi_1: mínimo=44.00  médio=45.20  máximo=46.00
+coretemp_Package id 0: mínimo=46.00  médio=48.40  máximo=52.00
+coretemp_Core 0: mínimo=43.00  médio=45.13  máximo=47.00
+coretemp_Core 1: mínimo=42.00  médio=45.60  máximo=52.00
+coretemp_Core 2: mínimo=42.00  médio=44.33  máximo=47.00
+coretemp_Core 3: mínimo=42.00  médio=45.07  máximo=50.00
 
-total de amostras coletadas: 1
+total de amostras coletadas: 15
