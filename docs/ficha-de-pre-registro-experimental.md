@@ -128,9 +128,7 @@ Os registros serão agrupados por **sistema operacional, tamanho do bloco de mem
 
 Para cada grupo, serão calculados **média, mediana, desvio-padrão, mínimo e máximo dos tempos de alocação, escrita, leitura e liberação, em milissegundos.** 
 
-Os resultados serão apresentados por meio de 
-
-**tabelas comparativas e gráficos que relacionem tamanho do bloco e tempo, distinguindo Windows e Linux.** 
+Os resultados serão apresentados por meio de **tabelas comparativas e gráficos que relacionem tamanho do bloco e tempo, distinguindo Windows e Linux.** 
 
 Consideraremos que um sistema teve melhor desempenho em uma operação e tamanho quando **apresentar menor medida central dos tempos, prioritariamente mediana e também média, considerando a variabilidade das 100 repetições.** 
 
