@@ -77,11 +77,11 @@ Classificação do que será alterado, o que será medido e o que deverá perman
 | ----- | ----- |
 | Variável independente | Sistema operacional (Windows ou Linux) |
 | Variáveis dependentes | Tempo de alocação, escrita, leitura e liberação de memória (ms), para cada tamanho de bloco |
-| Variáveis controladas | Hardware físico (Samsung Book X40, i5-10210U, 16 GB RAM, HD 1 TB), código-fonte do benchmark, versão do python, tamanhos de bloco (100 a 1000 MB), número de repetições (100), ausência de outros programas em execução |
+| Variáveis controladas | Hardware físico (Samsung Book X40, i5-10210U, 16 GB RAM, HD 1 TB), código-fonte do benchmark, versão do python, tamanhos de bloco (100 a 1000 MB), número de repetições (100) e a ausência de outros programas em execução |
 
 **7\. Condições mantidas constantes** 
 
-Marquem e expliquem como cada condição será controlada: 
+Como cada condição será controlada? 
 
 | Condição  | Controlada?  | Como será verificada? |
 | ----- | ----- | ----- |
