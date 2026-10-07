@@ -51,9 +51,9 @@ Optamos por dual boot para garantir que o hardware físico (processador, memóri
 
 | Item  | Windows  | Linux |
 | ----- | ----- | ----- |
-| Versão do sistema | Windows 10/11 (conferir versão instalada) | Distribuição escolhida (ex.: ubuntu 24.04) |
+| Versão do sistema | Windows 11 | Ubuntu 26.04 LTS (Resolute Raccoon) |
 | Arquitetura | x64 | x64 |
-| Versão do Python | Conferir com python--version | Conferir com python3--version |
+| Versão do Python | 3.14.8 | 3.14.8 |
 | Memória disponível | 16 GB | 16 GB |
 | Quantidade de vCPUs, se VM | \- | \- |
 | RAM atribuída, se VM | \- | \- |
