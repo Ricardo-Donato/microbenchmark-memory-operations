@@ -45,7 +45,7 @@ Em condições experimentais equivalentes, qual dos sistemas operacionais aprese
 Dual boot no mesmo computador 
 
 **Justificativa da escolha:**   
-Optamos por dual boot para garantir que o hardware físico (processador, memória ram e armazenamento) seja exatamente o mesmo nos dois sistemas operacionais, eliminando a variação introduzida por virtualização (overhead de hypervisor, alocação de vcpus/ram). isso aproxima as condições experimentais dos dois ambientes, permitindo atribuir eventuais diferenças de desempenho ao sistema operacional, e não ao hardware.
+Optamos por dual boot para garantir que o hardware físico (processador, memória ram e armazenamento) seja exatamente o mesmo nos dois sistemas operacionais, eliminando a variação introduzida por virtualização (overhead de hypervisor, alocação de vCPUs/RAM). Isso aproxima as condições experimentais dos dois ambientes, permitindo atribuir eventuais diferenças de desempenho ao sistema operacional, e não ao hardware.
 
 **Identificação dos ambientes** 
 
