@@ -1,103 +1,64 @@
-# GUIA DE EXECUÇÃO - `app_benchmark.py`
+# Guia de Execução — memory_benchmark.py
 
-## O que este script faz
-Simula o processamento de $N$ requisições de um app público (cenário: chatbot municipal). Cada requisição aloca, escreve, lê e libera um bloco de memória, representando o processo de integração descrito na situação-problema.
+Script oficial do experimento, exigido pela ficha de pré-registro (itens 4 e 9). Testa blocos de 100 a 1000 MB, em passos de 100 MB, com 100 repetições para cada tamanho (1.000 testes no total). Mede separadamente o tempo de alocação, escrita, leitura e liberação de memória, em milissegundos, e gera um CSV com uma linha por teste.
 
-Enquanto a carga roda, o script monitora em segundo plano o uso de CPU, memória (do sistema e do próprio processo) e, quando disponível, a temperatura dos sensores do hardware.
+## O que ele faz
 
-Ao final, gera um relatório `.txt` com um resumo do hardware do dispositivo e os valores mínimo, médio e máximo de cada métrica coletada.
+Para cada tamanho de bloco (100, 200, 300, ..., 1000 MB) e para cada uma das 100 repetições daquele tamanho, o script:
+1. aloca um bloco de memória do tamanho definido;
+2. escreve dados nesse bloco;
+3. lê o conteúdo do bloco (calculando um hash, para garantir que toda a memória seja efetivamente lida);
+4. libera o bloco.
 
-O **mesmo script** deve ser executado, sem nenhuma alteração, no Windows e no Linux (dual boot), para permitir a comparação entre os dois sistemas.
+O tempo de cada uma dessas quatro operações é registrado em milissegundos e gravado em uma linha do arquivo CSV.
 
----
+O mesmo script deve ser executado, sem nenhuma alteração, no Windows e no Linux (dual boot), para permitir a comparação entre os dois sistemas.
 
-## Pré-requisitos
-- Python 3.10 ou superior instalado.
-- Biblioteca `psutil` instalada (instruções abaixo).
+## Tempo esperado de execução
 
----
+A execução completa (1.000 testes) deve levar entre 20 e 40 minutos, dependendo do hardware. Não interrompa a execução no meio: os dados só ficam completos ao final.
 
-## Passo a passo - Windows
+## Passo a passo (Windows ou Linux)
 
-1. Coloque o arquivo `app_benchmark.py` em uma pasta de sua preferência (ex.: `C:\Users\SEU_USUARIO\Documents\benchmark`).
-2. Abra o PowerShell dentro dessa pasta:
-   - Na barra de endereços do Explorador de Arquivos, apague o texto, digite `powershell` e pressione **Enter**.
-   - Ou segure `Shift`, clique com o botão direito num espaço vazio da pasta e escolha **Abrir janela do PowerShell aqui** (ou *Abrir no Terminal*).
-3. Confirme que o arquivo está na pasta digitando:
-   ```powershell
-   dir
-   ```
-4. Instale a dependência:
-   ```powershell
-   pip install psutil
-   ```
-5. Rode o benchmark (exemplo com 1000 requisições):
-   ```powershell
-   python app_benchmark.py --requests 1000 --block-size 4 --out relatorio_windows.txt
-   ```
-6. Repita trocando `--requests` para `100` e para `10000`, sempre mudando o nome do arquivo em `--out` para não sobrescrever os relatórios anteriores (ex.: `relatorio_windows_100.txt`, `relatorio_windows_1000.txt`, `relatorio_windows_10000.txt`).
+1. Coloque o arquivo `memory_benchmark.py` na pasta do projeto (ex.: `Documents/benchmark` no Windows, ou `~/benchmark` no Linux).
+2. Abra o terminal (PowerShell no Windows, terminal no Linux) dentro dessa pasta.
+3. Rode o script:
 
----
+   **Windows:**
+```bash
+   python memory_benchmark.py --out resultados_windows.csv
+```
 
-## Passo a passo - Linux (Ubuntu)
+   **Linux:**
+```bash
+   python3 memory_benchmark.py --out resultados_linux.csv
+```
 
-1. Coloque o arquivo `app_benchmark.py` em uma pasta de sua preferência (ex.: `~/benchmark`).
-2. Abra o terminal dentro dessa pasta (clique com o botão direito na pasta, no gerenciador de arquivos, e procure a opção **Abrir no terminal**, ou navegue manualmente com `cd`).
-3. Instale a dependência:
-   ```bash
-   pip install psutil
-   ```
-   *(Se der erro de permissão, use: `pip install psutil --user`)*
-4. *(Opcional, mas recomendado)* Para o script conseguir ler a temperatura do hardware, instale e configure o `lm-sensors`:
-   ```bash
-   sudo apt install lm-sensors
-   sudo sensors-detect
-   ```
-   *(Responda "yes" às perguntas padrão)*
-5. Rode o benchmark (exemplo com 1000 requisições):
-   ```bash
-   python3 app_benchmark.py --requests 1000 --block-size 4 --out relatorio_linux.txt
-   ```
-6. Repita trocando `--requests` para `100` e para `10000`, sempre mudando o nome do arquivo em `--out` (ex.: `relatorio_linux_100.txt`, `relatorio_linux_1000.txt`, `relatorio_linux_10000.txt`).
-
----
+4. Aguarde a finalização. O script imprime o progresso bloco a bloco (ex.: "bloco 300 mb concluído (100 testes em 28.4s)").
+5. Ao final, confira se o arquivo CSV tem exatamente 1.000 linhas de dados (sem contar o cabeçalho): 10 tamanhos de bloco x 100 repetições.
 
 ## Parâmetros disponíveis
 
-- `--requests`: Número de requisições simuladas. Aceita apenas `100`, `1000` ou `10000`.
-- `--block-size`: Tamanho, em MB, do bloco de memória usado por requisição. Padrão: `4`.
-- `--interval`: Intervalo, em segundos, entre cada amostra de monitoramento (cpu/memória/temperatura). Padrão: `0.2`.
-- `--out`: Nome do arquivo de relatório `.txt` gerado ao final. Padrão: `relatorio.txt`.
+| Parâmetro | Descrição | Padrão |
+|---|---|---|
+| `--out` | nome do arquivo csv de saída | `resultados.csv` |
+| `--block-min` | menor tamanho de bloco, em mb | `100` |
+| `--block-max` | maior tamanho de bloco, em mb | `1000` |
+| `--block-step` | incremento entre tamanhos de bloco, em mb | `100` |
+| `--repetitions` | número de repetições por tamanho de bloco | `100` |
 
----
+Os quatro últimos parâmetros já vêm configurados conforme a ficha e não precisam ser alterados na execução oficial. Eles existem para permitir um teste rápido antes da execução completa, por exemplo:
 
-## O que o relatório contém
-
-- **Informações de hardware:** Sistema operacional, arquitetura, processador, núcleos físicos e lógicos, frequência da CPU, memória RAM total, memória swap total e discos (com espaço total, usado e livre).
-- **Dados da execução:** Data/hora, número de requisições simuladas, tamanho do bloco usado e duração total da carga.
-- **Uso de CPU (%):** Mínimo, médio e máximo durante a execução.
-- **Uso de memória do sistema (% e MB):** Mínimo, médio e máximo.
-- **Uso de memória do processo (RSS, em MB):** Mínimo, médio e máximo.
-- **Temperaturas dos sensores (quando disponíveis):** Mínimo, médio e máximo por sensor. No Windows, geralmente aparece como "não disponível", pois o sistema não expõe essa informação sem software adicional.
-
----
-
-## Organização sugerida dos arquivos no repositório
-
-```text
-resultados/
-  relatorio_windows_100.txt
-  relatorio_windows_1000.txt
-  relatorio_windows_10000.txt
-  relatorio_linux_100.txt
-  relatorio_linux_1000.txt
-  relatorio_linux_10000.txt
+```bash
+python memory_benchmark.py --block-min 10 --block-max 30 --block-step 10 --repetitions 3 --out teste.csv
 ```
 
----
+Isso gera poucos registros em segundos, só para confirmar que o script está funcionando antes de rodar a versão completa (que demora mais).
 
-## Problemas comuns
+## Sobre a identificação do sistema no CSV
 
-- **`pip` não é reconhecido como comando:** Reinstale o Python marcando a opção **"Add Python to PATH"** durante a instalação.
-- **`No matching distribution found for psutil`:** Confira se digitou o nome certo do pacote (`psutil`, com um L só).
-- **`No such file or directory` ao rodar o python:** O terminal não está aberto na mesma pasta onde o arquivo `app_benchmark.py` foi salvo. Confirme com o comando `dir` (Windows) ou `ls` (Linux) antes de rodar.
+O cabeçalho do csv (`bloco_MB,teste,alloc_ms,write_ms,read_ms,free_ms`) não tem uma coluna de sistema operacional, porque cada arquivo já é gerado por um sistema só (um csv no Windows, outro no Linux). O nome do arquivo (ex.: `resultados_windows.csv` / `resultados_linux.csv`) é quem identifica de qual sistema são os dados.
+
+Na hora da análise (após coletar os dois arquivos), será necessário unir os dois csv em uma tabela só, adicionando uma coluna "sistema" (windows ou linux) para cada conjunto de linhas. Isso é feito na etapa de análise, não durante a coleta.
+
+## Organização sugerida dos arquivos no repositório
