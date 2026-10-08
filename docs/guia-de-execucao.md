@@ -20,18 +20,18 @@ A execução completa (1.000 testes) deve levar entre 20 e 40 minutos, dependend
 
 ## Passo a passo (Windows ou Linux)
 
-1. Coloque o arquivo `memory_benchmark.py` na pasta do projeto (ex.: `Documents/benchmark` no Windows, ou `~/benchmark` no Linux).
+1. Coloque o arquivo `memoria_benchmark.py` na pasta do projeto (ex.: `Documents/benchmark` no Windows, ou `~/benchmark` no Linux).
 2. Abra o terminal (PowerShell no Windows, terminal no Linux) dentro dessa pasta.
 3. Rode o script:
 
    **Windows:**
 ```bash
-   python memory_benchmark.py --out resultados_windows.csv
+   python memoria_benchmark.py --out resultados_windows.csv
 ```
 
    **Linux:**
 ```bash
-   python3 memory_benchmark.py --out resultados_linux.csv
+   python3 memoria_benchmark.py --out resultados_linux.csv
 ```
 
 4. Aguarde a finalização. O script imprime o progresso bloco a bloco (ex.: "bloco 300 mb concluído (100 testes em 28.4s)").
@@ -50,7 +50,7 @@ A execução completa (1.000 testes) deve levar entre 20 e 40 minutos, dependend
 Os quatro últimos parâmetros já vêm configurados conforme a ficha e não precisam ser alterados na execução oficial. Eles existem para permitir um teste rápido antes da execução completa, por exemplo:
 
 ```bash
-python memory_benchmark.py --block-min 10 --block-max 30 --block-step 10 --repetitions 3 --out teste.csv
+python memoria_benchmark.py --block-min 10 --block-max 30 --block-step 10 --repetitions 3 --out teste.csv
 ```
 
 Isso gera poucos registros em segundos, só para confirmar que o script está funcionando antes de rodar a versão completa (que demora mais).
