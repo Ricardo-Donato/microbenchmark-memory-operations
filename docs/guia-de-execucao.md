@@ -62,14 +62,6 @@ Na hora da análise (após coletar os dois arquivos), será necessário unir os 
 
 ## Análise dos resultados
 
-Com os dois CSVs nos caminhos indicados, execute a partir da raiz do repositório:
-
-```bash
-python code/analise_resultados.py
-```
-
-O script valida cabeçalho, campos numéricos, valores finitos e não negativos, tamanhos, repetições e duplicidades. Em seguida, gera `RESULTADOS/TABELAS/resumo_estatistico.csv`, com média, mediana, desvio-padrão amostral, mínimo e máximo por operação, sistema e tamanho; e `RESULTADOS/TABELAS/tabelas_comparativas.md`, com média e mediana lado a lado. Os CSVs brutos não são modificados.
-
-O relatório comparativo apresenta os gráficos existentes, interpreta os valores por operação e descreve as limitações do cronômetro atual.
+Os CSVs coletados ficam em `RESULTADOS/WINDOWS/resultados_windows.csv` e `RESULTADOS/LINUX/resultados_linux.csv`. O repositório também contém os gráficos em `RESULTADOS/GRÁFICOS/` e a análise textual no resumo expandido, em `docs/`. Não há um script de análise que gere tabelas estatísticas ou comparativas automaticamente.
 
 ## Organização dos arquivos no repositório
