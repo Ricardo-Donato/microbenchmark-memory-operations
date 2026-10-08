@@ -1,4 +1,4 @@
-# Guia de Execução — memory_benchmark.py
+# Guia de Execução — memoria_benchmark.py
 
 Script oficial do experimento, exigido pela ficha de pré-registro (itens 4 e 9). Testa blocos de 100 a 1000 MB, em passos de 100 MB, com 100 repetições para cada tamanho (1.000 testes no total). Mede separadamente o tempo de alocação, escrita, leitura e liberação de memória, em milissegundos, e gera um CSV com uma linha por teste.
 
