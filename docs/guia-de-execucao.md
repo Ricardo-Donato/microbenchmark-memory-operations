@@ -1,4 +1,4 @@
-# Guia de Execução — memoria_benchmark.py
+# Guia de Execução — `code/memoria_benchmark.py`
 
 Script oficial do experimento, exigido pela ficha de pré-registro (itens 4 e 9). Testa blocos de 100 a 1000 MB, em passos de 100 MB, com 100 repetições para cada tamanho (1.000 testes no total). Mede separadamente o tempo de alocação, escrita, leitura e liberação de memória, em milissegundos, e gera um CSV com uma linha por teste.
 
@@ -20,22 +20,21 @@ A execução completa (1.000 testes) deve levar entre 20 e 40 minutos, dependend
 
 ## Passo a passo (Windows ou Linux)
 
-1. Coloque o arquivo `memoria_benchmark.py` na pasta do projeto (ex.: `Documents/benchmark` no Windows, ou `~/benchmark` no Linux).
-2. Abra o terminal (PowerShell no Windows, terminal no Linux) dentro dessa pasta.
-3. Rode o script:
+1. Clone ou baixe o repositório e abra o terminal (PowerShell no Windows ou terminal no Linux) na pasta raiz do projeto.
+2. Rode o script:
 
    **Windows:**
 ```bash
-   python memoria_benchmark.py --out resultados_windows.csv
+   python code/memoria_benchmark.py --out RESULTADOS/WINDOWS/resultados_windows.csv
 ```
 
    **Linux:**
 ```bash
-   python3 memoria_benchmark.py --out resultados_linux.csv
+   python3 code/memoria_benchmark.py --out RESULTADOS/LINUX/resultados_linux.csv
 ```
 
-4. Aguarde a finalização. O script imprime o progresso bloco a bloco (ex.: "bloco 300 mb concluído (100 testes em 28.4s)").
-5. Ao final, confira se o arquivo CSV tem exatamente 1.000 linhas de dados (sem contar o cabeçalho): 10 tamanhos de bloco x 100 repetições.
+3. Aguarde a finalização. O script imprime o progresso bloco a bloco (ex.: "bloco 300 mb concluído (100 testes em 28.4s)").
+4. Ao final, confira se o arquivo CSV tem exatamente 1.000 linhas de dados (sem contar o cabeçalho): 10 tamanhos de bloco x 100 repetições.
 
 ## Parâmetros disponíveis
 
@@ -61,4 +60,16 @@ O cabeçalho do csv (`bloco_MB,teste,alloc_ms,write_ms,read_ms,free_ms`) não te
 
 Na hora da análise (após coletar os dois arquivos), será necessário unir os dois csv em uma tabela só, adicionando uma coluna "sistema" (windows ou linux) para cada conjunto de linhas. Isso é feito na etapa de análise, não durante a coleta.
 
-## Organização sugerida dos arquivos no repositório
+## Análise dos resultados
+
+Com os dois CSVs nos caminhos indicados, execute a partir da raiz do repositório:
+
+```bash
+python code/analise_resultados.py
+```
+
+O script valida cabeçalho, campos numéricos, valores finitos e não negativos, tamanhos, repetições e duplicidades. Em seguida, gera `RESULTADOS/TABELAS/resumo_estatistico.csv`, com média, mediana, desvio-padrão amostral, mínimo e máximo por operação, sistema e tamanho; e `RESULTADOS/TABELAS/tabelas_comparativas.md`, com média e mediana lado a lado. Os CSVs brutos não são modificados.
+
+O relatório comparativo apresenta os gráficos existentes, interpreta os valores por operação e descreve as limitações do cronômetro atual.
+
+## Organização dos arquivos no repositório
