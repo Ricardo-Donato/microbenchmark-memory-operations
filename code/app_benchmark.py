@@ -1,4 +1,115 @@
 import argparse
+import csv
+import gc
+import hashlib
+import os
+import platform
+import time
+
+
+# mede o tempo de execução de uma função, em milissegundos
+def timed_ms(func, *args, **kwargs):
+    start = time.perf_counter()
+    result = func(*args, **kwargs)
+    elapsed_ms = (time.perf_counter() - start) * 1000
+    return result, elapsed_ms
+
+
+# executa um teste completo: alocar, escrever, ler e liberar um bloco
+def run_single_test(block_size_mb, pattern):
+    size_bytes = block_size_mb * 1024 * 1024
+
+    buffer, t_alloc = timed_ms(bytearray, size_bytes)
+    holder = {"buffer": buffer}
+    del buffer
+
+    def write_block():
+        holder["buffer"][:] = pattern
+
+    _, t_write = timed_ms(write_block)
+
+    _, t_read = timed_ms(lambda: hashlib.md5(holder["buffer"]).digest())
+
+    def free_block():
+        del holder["buffer"]
+        gc.collect()
+
+    _, t_free = timed_ms(free_block)
+
+    return t_alloc, t_write, t_read, t_free
+
+
+# roda todos os blocos e repetições definidos, gravando o csv linha a linha
+def run_all_tests(out_path, block_min, block_max, block_step, repetitions):
+    block_sizes = list(range(block_min, block_max + 1, block_step))
+    fieldnames = ["bloco_MB", "teste", "alloc_ms", "write_ms", "read_ms", "free_ms"]
+
+    start_total = time.perf_counter()
+
+    with open(out_path, "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+
+        for block_mb in block_sizes:
+            pattern = os.urandom(block_mb * 1024 * 1024)
+            block_start = time.perf_counter()
+
+            for teste in range(1, repetitions + 1):
+                t_alloc, t_write, t_read, t_free = run_single_test(block_mb, pattern)
+                writer.writerow({
+                    "bloco_MB": block_mb,
+                    "teste": teste,
+                    "alloc_ms": round(t_alloc, 4),
+                    "write_ms": round(t_write, 4),
+                    "read_ms": round(t_read, 4),
+                    "free_ms": round(t_free, 4),
+                })
+
+            f.flush()
+            block_elapsed = time.perf_counter() - block_start
+            print(f"bloco {block_mb} mb concluído ({repetitions} testes em {block_elapsed:.1f}s)")
+
+    total_elapsed = time.perf_counter() - start_total
+    return len(block_sizes) * repetitions, total_elapsed
+
+
+# lê os parâmetros da linha de comando e conduz a execução do experimento
+def main():
+    parser = argparse.ArgumentParser(
+        description="microbenchmark oficial de operações de memória (alocação, escrita, leitura, liberação)."
+    )
+    parser.add_argument("--out", type=str, default="resultados.csv",
+                         help="arquivo csv de saída (padrão: resultados.csv)")
+    parser.add_argument("--block-min", type=int, default=100,
+                         help="menor tamanho de bloco, em mb (padrão: 100)")
+    parser.add_argument("--block-max", type=int, default=1000,
+                         help="maior tamanho de bloco, em mb (padrão: 1000)")
+    parser.add_argument("--block-step", type=int, default=100,
+                         help="incremento entre tamanhos de bloco, em mb (padrão: 100)")
+    parser.add_argument("--repetitions", type=int, default=100,
+                         help="número de repetições por tamanho de bloco (padrão: 100)")
+    args = parser.parse_args()
+
+    print("=== microbenchmark oficial de operações de memória ===")
+    print(f"sistema operacional : {platform.system()} {platform.release()}")
+    print(f"máquina             : {platform.machine()}")
+    print(f"python              : {platform.python_version()}")
+    print(f"blocos              : {args.block_min} a {args.block_max} mb, passo {args.block_step} mb")
+    print(f"repetições por bloco: {args.repetitions}")
+    print()
+
+    total_testes, total_elapsed = run_all_tests(
+        args.out, args.block_min, args.block_max, args.block_step, args.repetitions
+    )
+
+    print()
+    print(f"total de testes gravados : {total_testes}")
+    print(f"tempo total de execução  : {total_elapsed / 60:.1f} minutos")
+    print(f"resultados salvos em     : {os.path.abspath(args.out)}")
+
+
+if __name__ == "__main__":
+    main()import argparse
 import gc
 import platform
 import statistics
